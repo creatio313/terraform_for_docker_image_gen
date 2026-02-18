@@ -1,0 +1,23 @@
+# Terraform variables and secrets
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# Terraform state files
+*.tfstate
+*.tfstate.*
+
+# Terraform directory
+.terraform/
+.terraform.lock.hcl
+
+# OS and IDE files
+.DS_Store
+.vscode/
+*.swp
+*.swo
+
+# SSH keys and sensitive files
+*.ppk
+*.pem
+*.key
