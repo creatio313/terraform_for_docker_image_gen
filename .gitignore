@@ -18,6 +18,4 @@
 *.swo
 
 # SSH keys and sensitive files
-*.ppk
-*.pem
-*.key
+.ssh/
