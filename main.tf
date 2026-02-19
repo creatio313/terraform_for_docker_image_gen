@@ -69,14 +69,26 @@ resource "sakura_packet_filter_rules" "rules" {
 resource "sakura_script" "docker_install_script" {
   name    = "docker_install_script"
   class   = "shell"
-  content = file("startup-script.sh")
+  content = file("scripts/install_docker.sh")
   icon_id = var.ubuntu_icon
+}
+
+# Generate a temporary SSH key pair for the server.
+resource "tls_private_key" "temporary_ssh_key" {
+  algorithm = "RSA"
+  rsa_bits  = 4096
+}
+
+# Save the private key to a local file. Please save it securely, as it will be needed to access the server.
+resource "local_file" "private_key_file" {
+  filename = ".ssh/id_rsa.pem"
+  content  = tls_private_key.temporary_ssh_key.private_key_pem
 }
 
 resource "sakura_ssh_key" "docker_gen_server_sshkey" {
   name        = "docker_gen_server_sshkey"
   description = "SSH key for the docker generation server. Please save it in .ssh/ directory."
-  public_key  = file(".ssh/id_rsa.pub")
+  public_key  = tls_private_key.temporary_ssh_key.public_key_openssh
 }
 
 resource "sakura_server" "docker_gen_server" {
