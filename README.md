@@ -8,5 +8,5 @@ Terraform init
 Terraform plan
 Terraform apply
 ```
-1. サーバーが構築されます。サーバーログインに使用する秘密鍵は、.sshフォルダに作成されます。
-[^1]: Terraform destroyできるよう、コンテナレジストリは作成していません。
+サーバーが構築されます。サーバーログインに使用する秘密鍵は、.sshフォルダに作成されます。
+Terraform destroyできるよう、コンテナレジストリは作成していません。
