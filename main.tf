@@ -28,7 +28,7 @@ resource "sakura_disk" "docker-gen-disk" {
 
 resource "sakura_packet_filter" "minimum_filter" {
   name        = "minimum_filter"
-  description = "Minimum packet filter for docker-gen-server."
+  description = "Minimum packet filter for the docker generation server."
   zone        = var.zone
 }
 
@@ -117,7 +117,7 @@ resource "sakura_server" "docker-gen-server" {
 
 resource "sakura_ssh_key" "docker-gen-server-sshkey" {
   name       = "docker-gen-server-sshkey"
-  description = "SSH key for docker-gen-server. Please save it in .ssh/ directory."
+  description = "SSH key for the docker generation server. Please save it in .ssh/ directory."
   public_key = file(".ssh/id_rsa.pub")
 }
 
