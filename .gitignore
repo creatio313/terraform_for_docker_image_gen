@@ -4,18 +4,12 @@
 !*.tfvars.example
 
 # Terraform state files
-*.tfstate
-*.tfstate.*
+terraform.tfstate
+terraform.tfstate.*
+.terraform.tfstate.lock.info
 
 # Terraform directory
 .terraform/
-.terraform.lock.hcl
-
-# OS and IDE files
-.DS_Store
-.vscode/
-*.swp
-*.swo
 
 # SSH keys and sensitive files
 .ssh/
