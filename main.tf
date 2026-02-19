@@ -80,9 +80,9 @@ resource "tls_private_key" "temporary_ssh_key" {
 }
 
 # Save the private key to a local file. Please save it securely, as it will be needed to access the server.
-resource "local_file" "private_key_file" {
-  filename = ".ssh/id_rsa.pem"
+resource "local_sensitive_file" "private_key_file" {
   content  = tls_private_key.temporary_ssh_key.private_key_pem
+  filename = ".ssh/id_rsa.pem"
 }
 
 resource "sakura_ssh_key" "docker_gen_server_sshkey" {
