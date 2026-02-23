@@ -2,16 +2,24 @@ data "sakura_archive" "ubuntu" {
   os_type = "ubuntu2404"
 }
 
+resource "sakura_kms" "docker_gen_server_encryption_key" {
+  name        = "docker_gen_server_encryption_key"
+  description = "Encryption key for the docker generation server."
+  key_origin  = "generated"
+}
+
 resource "sakura_disk" "docker_gen_disk" {
   name        = "docker_gen_disk"
   description = "Disk for the docker generation server."
 
-  connector         = "virtio"
-  icon_id           = var.ubuntu_icon
-  plan              = "ssd"
-  size              = 100
-  source_archive_id = data.sakura_archive.ubuntu.id
-  zone              = var.zone
+  connector            = "virtio"
+  encryption_algorithm = "aes256_xts"
+  icon_id              = var.ubuntu_icon
+  kms_key_id           = sakura_kms.docker_gen_server_encryption_key.id
+  plan                 = "ssd"
+  size                 = 100
+  source_archive_id    = data.sakura_archive.ubuntu.id
+  zone                 = var.zone
 }
 
 resource "sakura_packet_filter" "minimum_filter" {
